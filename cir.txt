@@ -1,0 +1,115 @@
+#include<iostream>
+using namespace std;
+class CQueue
+{
+    int queue[5],front,rear,n;
+    public:
+            CQueue()
+            {
+                n=5;
+                front=-1;
+                rear=-1;
+            }
+
+            void enqueue(int data);
+            int dequeue();
+            void display();
+
+};
+ 
+ void CQueue::enqueue(int data)
+ {
+    if(front==-1 && rear==-1)
+    {
+        front=rear=0;
+        queue[rear]=data;
+    }
+    else if(((rear+1)%n)==front)
+    {
+        cout<<"Queue is full";
+    }
+    else
+    {
+        rear=(rear+1)%n;
+        queue[rear]=data;
+
+    }
+ }
+ int CQueue::dequeue()
+ {
+    int data;
+    if(front==-1)
+     {
+        cout<<"Queue is underflow";
+     }  
+     else if(front==rear)
+     {
+        front=rear=-1;
+        data=queue[front];
+     }
+     else
+     {
+         data=queue[front];
+         front=(front+1)%n;
+     }
+ }
+ void CQueue::display()
+ {
+    int i=front;
+    if(front==-1 && rear==-1)
+    {
+        cout<<"\n queue is empty"; //OO
+    }
+    else
+    {
+       while(i!=rear);
+       {
+        cout<<queue[i]<<" ";   //oo 
+        i=(i+1)%n;  
+       }   
+       cout<<queue[rear];
+    }           
+
+    }
+ int main()
+ {
+    int ch,data;
+    CQueue q = CQueue();
+    do
+    {
+    cout<<"\n1.enqueue(Insertion)";
+    cout<<"\n2.dequeue(Deletion)";
+    cout<<"\n3.display";
+    cout<<"\n4.Exit";
+    cout<<"\nEnter your choice:";
+    cin>>ch;
+
+    switch(ch)
+    {
+        case 1:
+              cout<<"\n enter data:";
+              cin>>data;
+              q.enqueue(data);
+              break;
+
+        case 2:
+               cout<<"\n deleted data is:" <<data;
+               data=q.dequeue();
+               break;
+
+         case 3:
+               q.display();
+               break;
+
+    }
+
+    }while(ch!=4);
+    return 0;
+
+ }
+
+ 
+
+
+
+    

@@ -1,0 +1,66 @@
+#include<iostream>
+using namespace std;
+template<typename T>
+
+    void heapify(T arr[],int n,int i,bool maxheap)
+    {
+        int largest=i;
+        int left=2*i+1;
+        int right=2*i+2;
+
+        if(left<n&&((maxheap&&arr[left]>arr[largest])||
+        (!maxheap&&arr[left]<arr[largest])))
+        largest=left;
+
+        if(right<n&&((maxheap&&arr[right]>arr[largest])||
+        (!maxheap&&arr[right]<arr[largest])))
+        largest=right;
+
+        if(largest!=i)
+        {
+            swap(arr[i],arr[largest]);
+            heapify(arr,n,largest,maxheap);
+        }
+    }
+    template<typename T>
+    void heapsort(T arr[],int size,bool maxheap)
+    {
+        for(int i=size/2-1;i>=0;i--)
+        heapify(arr,size,i,maxheap);
+
+        for(int i=size-1;i>0;i--)
+        {
+            swap(arr[0],arr[1]);
+            heapify(arr,0,1,maxheap);
+        }
+
+    }
+    int main()
+    {
+        int size;
+        cout<<"Enter the size of array:";
+        cin>>size;
+
+        int arr[size];
+        cout<<"Enter "<<size<<" elements:\n";
+        for(int i=0;i<size;i++)
+        {
+            cin>>arr[i];
+        }
+    heapsort(arr,size,true);
+    cout<<"Sorted array is (maxheap):";
+    for(int i=0;i<size;i++)
+    cout<<arr[i]<<" ";
+    cout<<endl;
+
+    heapsort(arr,size,false);
+    cout<<"Sorted array is(minheap):";
+    for(int i=0;i<size;i++)
+    cout<<arr[i]<<" ";
+    cout<<endl;
+    return 0;
+    }
+
+
+
+   
