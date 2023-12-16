@@ -1,0 +1,139 @@
+#include<iostream>
+#include<string.h>
+using namespace std;
+struct student
+{
+   int rollno;
+   char name[30];
+   float sgpa;
+};
+void display(struct student s[20],int n)
+{
+    for(int i=0;i<n;i++)
+    {
+        cout<<"\n"<<s[i].rollno<<"\t"<<s[i].name<<"\t"<<s[i].sgpa;
+    }
+}
+void linear(struct student s[20],int n)
+{
+    int count=0;
+    float sgpa;
+
+    cout<<"\n Enter the sgpa to search:";
+    cin>>sgpa;
+
+    for(int i=0;i<n;i++)
+    {
+        if(s[i].sgpa==sgpa)
+        {
+           count++;
+           cout<<"\n"<<s[i].rollno<<"\t"<<s[i].name<<"\t"<<s[i].sgpa;
+        }
+
+        }
+
+   cout<<"\n Total number of records found:" <<count;
+  }
+  void Bubblesort(struct student s[30],int n)
+  {
+    int i,j,temp1;
+    float temp2;
+    char temp3[30];
+
+    for(i=0;i<n-1;i++)
+    {
+        for(j=0;j<n-1-i;j++)
+        {
+           if(s[j].rollno>s[j+1].rollno);
+           {
+              temp1 = s[j].rollno;
+              s[j].rollno=s[j+1].rollno;
+              s[j+1].rollno=temp1;
+
+              temp2 = s[j].sgpa;
+              s[j].sgpa=s[j+1].sgpa;
+              s[j+1].sgpa=temp2;
+
+              strcpy(temp3,s[j].name);
+              strcpy(s[j].name,s[j+1].name);
+              strcpy(s[j+1].name,temp3);
+            }
+        }
+    }display(s,n);
+  }
+  void Insertionsort(struct student s[30],int n)
+  {       
+           int i,j,temp1;
+          float temp2;
+          char temp3[30];
+
+          for(i=1;i<n;i++)
+
+           strcpy(temp3,s[i].name);
+           temp1 = s[i].rollno;
+           temp2 = s[i].sgpa;
+           j=i-1;
+
+           while(j>=0 && strcmp(s[j].name,temp3)>0)
+
+           {
+           strcpy(s[j+1].name,s[j].name);
+           s[j].rollno=s[j+1].rollno;
+           s[j].sgpa=s[j+1].sgpa;
+           j--;
+
+            strcpy(s[j+1].name,temp3);
+             s[j+1].rollno=temp1;
+             s[j+1].sgpa=temp2;
+
+           }display(s,n);
+
+  }
+  int main()
+  {
+    struct student s[30];
+    int i,n,ch;
+    cout<<"\n Enter total number of students:";
+    cin>>n;
+
+    cout<<"\n enter students information:";
+    for(i=0;i<n;i++)
+    {
+        cout<<"\n Enter name:";
+        cin>>s[i].name;
+        cout<<"\n Enter ROLLNO:";
+        cin>>s[i].rollno;
+        cout<<"\n Enter SGPA:";
+        cin>>s[i].sgpa;
+    }
+    display(s,n);
+
+    do
+    {
+        cout<<"\n.1.Linear Search";
+        cout<<"\n.2.Bubble Sort";
+        cout<<"\n.3.Inserion Sort";
+        cout<<"\n.4 Exit:";
+        cout<<"\n.enter your choice:";
+        cin>>ch;
+
+        switch(ch)
+        {
+            case 1:
+            linear(s,n);
+            break;
+
+            case 2:
+            Bubblesort(s,n);
+            break;
+
+            case 3:
+            Insertionsort(s,n);
+            break;
+        }
+    }while(ch!=4);
+    return 0;
+  }
+
+
+        
